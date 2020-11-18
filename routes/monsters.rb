@@ -10,4 +10,15 @@ class DungeonsAndDragonsAPI
       "BOO!"
     end
   end
+
+  hash_routes.on 'api' do |r|
+    set_view_subdir 'api'
+
+    r.get "monsters/index" do
+      response['Content-Type'] = 'application/json'  
+      @monsters = DB[:monsters].all
+      @monsters.to_json
+    end
+
+  end
 end
